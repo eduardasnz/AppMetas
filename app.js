@@ -24,15 +24,15 @@ const saveMetas = async () => {
 
 const cadastrarMeta = async () => {
     
-    if(metas.length == 0){
-        mensagem = 'Não existem metas.'
-        return
-    }
-    
     const meta = await input({ message: 'Digite a meta: '})
 
     if(meta.length == 0) {
         mensagem = ('A meta não pode ser vazia.')
+        return
+    }
+
+    if(metas.length == 0){
+        mensagem = 'Não existem metas.'
         return
     }
 
@@ -44,17 +44,17 @@ const cadastrarMeta = async () => {
 }
  
 const listarMetas = async () => {
-    
-    if(metas.length == 0){
-        mensagem = 'Não existem metas.'
-        return
-    }
 
     const respostas = await checkbox({
         message: 'Use as setas para mudar de meta, o espaço para selecionar para marcar/desmarcar e o enter para finalizar a etapa',
         choices: [...metas],
         instructions: false
     })
+
+    if(metas.length == 0){
+        mensagem = 'Não existem metas.'
+        return
+    }
 
     metas.forEach((m) => {
         m.checked = false
@@ -78,11 +78,6 @@ const listarMetas = async () => {
 
 const metasRealizadas = async () => {
     
-    if(metas.length == 0){
-        mensagem = 'Não existem metas.'
-        return
-    }
-
     const Realizadas = metas.filter((meta) => {
         return meta.checked
     })
@@ -91,11 +86,17 @@ const metasRealizadas = async () => {
         console.log('Não existem metas realizadas! :( ')
         return
     }
-
+    
     await select({
         message: 'Metas Realizadas',
         choices: [...Realizadas]
     })
+
+    if(metas.length == 0){
+        mensagem = 'Não existem metas.'
+        return
+    }
+
 }
 
 const metasAbertas = async () => {
