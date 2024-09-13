@@ -31,11 +31,6 @@ const cadastrarMeta = async () => {
         return
     }
 
-    if(metas.length == 0){
-        mensagem = 'Não existem metas.'
-        return
-    }
-
     metas.push(
         { value: meta, checked: false }
     ) //essa função vai colocar algo dentro da let
@@ -50,11 +45,6 @@ const listarMetas = async () => {
         choices: [...metas],
         instructions: false
     })
-
-    if(metas.length == 0){
-        mensagem = 'Não existem metas.'
-        return
-    }
 
     metas.forEach((m) => {
         m.checked = false
@@ -92,19 +82,9 @@ const metasRealizadas = async () => {
         choices: [...Realizadas]
     })
 
-    if(metas.length == 0){
-        mensagem = 'Não existem metas.'
-        return
-    }
-
 }
 
 const metasAbertas = async () => {
-   
-    if(metas.length == 0){
-        mensagem = 'Não existem metas.'
-        return
-    }
    
     const Abertas = metas.filter((metas) => {
         return metas.checked != true  
@@ -122,11 +102,6 @@ const metasAbertas = async () => {
 }
 
 const metasDeletadas = async () => {
-
-    if(metas.length == 0){
-        mensagem = 'Não existem metas.'
-        return
-    }
 
     const itemDelete = await checkbox({
         message: 'Selecione item para deletar',
